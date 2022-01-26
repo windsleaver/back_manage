@@ -1,18 +1,16 @@
 package main
 
 import (
+	"back_manage/service/sys/cmd/api/internal/config"
+	"back_manage/service/sys/cmd/api/internal/handler"
+	"back_manage/service/sys/cmd/api/internal/svc"
 	"flag"
 	"fmt"
-
-	"api/internal/config"
-	"api/internal/handler"
-	"api/internal/svc"
-
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"
 )
 
-var configFile = flag.String("f", "etc/api-api.yaml", "the config file")
+var configFile = flag.String("f", "etc/sys-api.yaml", "the config file")
 
 func main() {
 	flag.Parse()

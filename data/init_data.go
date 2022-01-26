@@ -1,8 +1,8 @@
 package data
 
 import (
+	"back_manage/data/model"
 	"fmt"
-	"go/data/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

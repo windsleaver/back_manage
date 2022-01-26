@@ -1,0 +1,7 @@
+Name: sys-api
+Host: 0.0.0.0
+Port: 8080
+
+Auth:
+  AccessSecret: $AccessSecret
+  AccessExpire: 120

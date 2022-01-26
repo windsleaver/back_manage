@@ -2,20 +2,18 @@
 package handler
 
 import (
-	"net/http"
-
-	"api/internal/svc"
-
+	"back_manage/service/sys/cmd/api/internal/svc"
 	"github.com/tal-tech/go-zero/rest"
+	"net/http"
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: ApiHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/user/login",
+				Handler: loginHandler(serverCtx),
 			},
 		},
 	)
