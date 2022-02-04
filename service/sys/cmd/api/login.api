@@ -1,9 +1,9 @@
 syntax = "v1"
 
 info(
-    title: "type title here"
-    desc: "type desc here"
-    author: "type author here"
+    title: "[用户登陆] login"
+    desc: "用户登陆"
+    author: "WindsLeaver"
     email: "type email here"
     version: "type version here"
 )
@@ -18,7 +18,14 @@ type LoginResp {
     UserName string `json:"userName"`
 }
 
+@server(
+    group: login
+)
+
 service sys-api {
+    @doc(
+        summary: "用户登陆"
+    )
     @handler login
         post /user/login (LoginReq) returns (LoginResp)
 }

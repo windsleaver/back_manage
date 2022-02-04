@@ -2,14 +2,25 @@ package svc
 
 import (
 	"back_manage/service/sys/cmd/api/internal/config"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type ServiceContext struct {
-	Config config.Config
+	Config  config.Config
+	DbEngin *gorm.DB
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	//启用gorm支持
+	db, err := gorm.Open(postgres.Open(c.Postgres.Dsn), &gorm.Config{
+		//NamingStrategy: schema.NamingStrategy{}
+	})
+	if err != nil {
+		panic(err)
+	}
 	return &ServiceContext{
-		Config: c,
+		Config:  c,
+		DbEngin: db,
 	}
 }

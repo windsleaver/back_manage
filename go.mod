@@ -4,7 +4,9 @@ go 1.17
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/tal-tech/go-zero v1.2.5
+	gorm.io/driver/mysql v1.2.3
 	gorm.io/driver/postgres v1.2.3
 	gorm.io/gorm v1.22.5
 )
@@ -12,6 +14,7 @@ require (
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect

@@ -2,6 +2,5 @@ Name: sys-api
 Host: 0.0.0.0
 Port: 8080
 
-Auth:
-  AccessSecret: $AccessSecret
-  AccessExpire: 120
+Postgres:
+  Dsn: host=localhost user=postgres password=b8662279 dbname=back_manage port=5432 sslmode=disable TimeZone=Asia/Shanghai

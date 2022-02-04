@@ -10,3 +10,12 @@ type LoginResp struct {
 	ID       string `json:"id"`
 	UserName string `json:"userName"`
 }
+
+type UserReq struct {
+	UserName string `json:"userName"`
+	Password string `json:"password"`
+	Name     string `json:"name"`
+	HeadImg  string `json:"headImg"`
+	Phone    string `json:"phone"`
+	Email    string `json:"email"`
+}

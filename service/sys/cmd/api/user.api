@@ -1,0 +1,30 @@
+syntax = "v1"
+
+info(
+    title: "[用户信息] user"
+    desc: "用户信息"
+    author: "WindsLeaver"
+    email: "type email here"
+    version: "type version here"
+)
+
+type UserReq {
+    UserName string `json:"userName"`
+    Password string `json:"password"`
+    Name string `json:"name"`
+    HeadImg string `json:"headImg"`
+    Phone string `json:"phone"`
+    Email string `json:"email"`
+}
+
+@server(
+    group: user
+)
+
+service sys-api {
+    @doc(
+        summary: "新增用户"
+    )
+    @handler user
+    post /user/add (UserReq) returns ()
+}

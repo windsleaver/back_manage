@@ -10,8 +10,8 @@ import "gorm.io/gorm"
  * @Description:
  **/
 
-//SYsRole 角色表
-type SYsRole struct {
+//SysRole 角色表
+type SysRole struct {
 	ID        string         `json:"id" gorm:"column:id;primaryKey;type:varchar(32)"`          //ID
 	RoleName  string         `json:"role_name" gorm:"column:role_name;type:varchar(32)"`       //角色名称
 	Remark    string         `json:"remark" gorm:"size:512"`                                   //备注
