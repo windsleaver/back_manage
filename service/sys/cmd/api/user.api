@@ -15,6 +15,7 @@ type UserReq {
     HeadImg string `json:"headImg"`
     Phone string `json:"phone"`
     Email string `json:"email"`
+    IsActive bool `json:"isActive"`
 }
 
 @server(

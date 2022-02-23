@@ -11,7 +11,7 @@ import "github.com/dgrijalva/jwt-go"
  **/
 
 var (
-	SmAuth    *SysManageCustomClaims           //后台管理
+	SmAuth    *SysManageUserClaims             //后台管理
 	RdAuth    *RiderCustomClaims               //骑手端
 	MeAuth    *MerchantCustomClaims            //商户端
 	MuaAuth   *MainUserAppCustomClaims         //用户app端
@@ -20,11 +20,10 @@ var (
 	IpAddress string                           //用户请求IP地址
 )
 
-// SysManageCustomClaims 后台管理CustomClaims
-type SysManageCustomClaims struct {
+// SysManageUserClaims 后台管理UserClaims
+type SysManageUserClaims struct {
 	TenantId     string `json:"tenant_id"`      //所属租户(或校区)ID
 	UserId       string `json:"user_id"`        //用户ID
-	SchoolId     string `json:"school_id"`      //校区ID
 	IsTenant     bool   `json:"is_tenant"`      //是否是租主[true:是; false:否]
 	IsAdmin      bool   `json:"is_admin"`       //是否是管理员[true:是; false:否]
 	IsBindWechat bool   `json:"is_bind_wechat"` //是否绑定微信[true:是; false:否]

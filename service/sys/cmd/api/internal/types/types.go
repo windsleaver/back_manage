@@ -7,8 +7,9 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	ID       string `json:"id"`
-	UserName string `json:"userName"`
+	ID        string `json:"id"`
+	UserName  string `json:"userName"`
+	UserToken string `json:"userToken"`
 }
 
 type UserReq struct {
@@ -18,4 +19,5 @@ type UserReq struct {
 	HeadImg  string `json:"headImg"`
 	Phone    string `json:"phone"`
 	Email    string `json:"email"`
+	IsActive bool   `json:"isActive"`
 }

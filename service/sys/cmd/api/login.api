@@ -16,6 +16,7 @@ type LoginReq {
 type LoginResp {
     ID string `json:"id"`
     UserName string `json:"userName"`
+    UserToken string `json:"userToken"`
 }
 
 @server(
