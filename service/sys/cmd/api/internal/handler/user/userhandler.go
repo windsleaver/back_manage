@@ -7,7 +7,7 @@ import (
 	"back_manage/service/sys/cmd/api/internal/logic/user"
 	"back_manage/service/sys/cmd/api/internal/svc"
 	"back_manage/service/sys/cmd/api/internal/types"
-	"github.com/tal-tech/go-zero/rest/httpx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func UserHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
