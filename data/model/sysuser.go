@@ -10,6 +10,8 @@ import "gorm.io/gorm"
  * @Description:
  **/
 
+var DefaultPassword = "password"
+
 // SysUser 用户表
 type SysUser struct {
 	ID             string         `json:"id" gorm:"column:id;primaryKey;type:varchar(32)"`            //ID
