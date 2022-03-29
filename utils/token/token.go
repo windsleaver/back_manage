@@ -24,7 +24,7 @@ func GenerateUserBackToken(tenantId, userId string, isTenant, isAdmin, isBindWec
 		IsBindWechat:   isBindWechat,
 		StandardClaims: jwt.StandardClaims{},
 	}
-	token, errs := wljwt.CreateJwtToken(wljwt.RIDER, loginIn)
+	token, errs := wljwt.CreateJwtToken(wljwt.SYSMANAGE, loginIn)
 	if errs != nil {
 		return "", errors.New("创建Token错误")
 	}

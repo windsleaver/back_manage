@@ -1,0 +1,54 @@
+syntax = "v1"
+
+info(
+    title: "[租户信息] tenant"
+    desc: "type desc here"
+    author: "type author here"
+    email: "type email here"
+    version: "type version here"
+)
+
+type TeanantReq {
+    tenantName string `json:"tenantName"`
+    name string `json:"name"`
+    description string `json:"description"`
+    isActive bool `json:"isActive"`
+    remark string `json:"remark"`
+}
+
+type TeanantEditReq {
+    id string `json:"id"`
+    tenantName string `json:"tenantName"`
+    name string `json:"name"`
+    description string `json:"description"`
+    isActive bool `json:"isActive"`
+    remark string `json:"remark"`
+}
+
+type TeanantStatusReq {
+    id string `json:"id"`
+}
+
+@server(
+    group: tenant
+)
+
+service sys-api {
+    @doc(
+        summary: "新增租户"
+    )
+    @handler createTenant
+    post /tenant/add (TeanantReq) returns ()
+
+    @doc(
+        summary: "编辑租户"
+    )
+    @handler editTenant
+    post /tenant/edit (TeanantEditReq) returns ()
+
+    @doc(
+        summary: "设置租户是否可用"
+    )
+    @handler setTenantStatus
+    post /tenant/setStatus (TeanantStatusReq) returns ()
+}

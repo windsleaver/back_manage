@@ -13,11 +13,44 @@ type LoginResp struct {
 }
 
 type UserReq struct {
-	UserName string `json:"userName"`
-	Password string `json:"password"`
-	Name     string `json:"name"`
-	HeadImg  string `json:"headImg"`
-	Phone    string `json:"phone"`
-	Email    string `json:"email"`
-	IsActive bool   `json:"isActive"`
+	UserName   string          `json:"userName"`
+	Password   string          `json:"password"`
+	Name       string          `json:"name"`
+	HeadImg    string          `json:"headImg"`
+	Phone      string          `json:"phone"`
+	Email      string          `json:"email"`
+	IsActive   bool            `json:"isActive"`
+	TenantList []TenantListReq `json:"tenantList"`
+	RoleList   []RoleListReq   `json:"roleList"`
+}
+
+type TenantListReq struct {
+	TenantId string `json:"tenantId"`
+	Remark   string `json:"remark"`
+}
+
+type RoleListReq struct {
+	RoleId string `json:"roleId"`
+	Remark string `json:"remark"`
+}
+
+type TeanantReq struct {
+	TenantName  string `json:"tenantName"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	IsActive    bool   `json:"isActive"`
+	Remark      string `json:"remark"`
+}
+
+type TeanantEditReq struct {
+	Id          string `json:"id"`
+	TenantName  string `json:"tenantName"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	IsActive    bool   `json:"isActive"`
+	Remark      string `json:"remark"`
+}
+
+type TeanantStatusReq struct {
+	Id string `json:"id"`
 }

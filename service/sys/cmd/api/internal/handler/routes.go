@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	login "back_manage/service/sys/cmd/api/internal/handler/login"
+	tenant "back_manage/service/sys/cmd/api/internal/handler/tenant"
 	user "back_manage/service/sys/cmd/api/internal/handler/user"
 	"back_manage/service/sys/cmd/api/internal/svc"
 
@@ -27,7 +28,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/user/add",
-				Handler: user.UserHandler(serverCtx),
+				Handler: user.CreateUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/edit",
+				Handler: user.EditUserHandler(serverCtx),
+			},
+		},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/tenant/add",
+				Handler: tenant.CreateTenantHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/tenant/edit",
+				Handler: tenant.EditTenantHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/tenant/setStatus",
+				Handler: tenant.SetTenantStatusHandler(serverCtx),
 			},
 		},
 	)

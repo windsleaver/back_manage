@@ -16,6 +16,18 @@ type UserReq {
     Phone string `json:"phone"`
     Email string `json:"email"`
     IsActive bool `json:"isActive"`
+    TenantList []TenantListReq `json:"tenantList"`
+    RoleList []RoleListReq `json:"roleList"`
+}
+
+type TenantListReq {
+    TenantId string `json:"tenantId"`
+    Remark string `json:"remark"`
+}
+
+type RoleListReq {
+    RoleId string `json:"roleId"`
+    Remark string `json:"remark"`
 }
 
 @server(
@@ -26,6 +38,12 @@ service sys-api {
     @doc(
         summary: "新增用户"
     )
-    @handler user
+    @handler createUser
     post /user/add (UserReq) returns ()
+
+    @doc(
+        summary: "编辑用户"
+    )
+    @handler editUser
+    post /user/edit (UserReq) returns ()
 }

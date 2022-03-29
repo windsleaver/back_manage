@@ -10,3 +10,4 @@ info(
 
 import "login.api"
 import "user.api"
+import "tenant.api"

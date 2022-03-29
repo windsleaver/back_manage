@@ -41,7 +41,7 @@ func CreateJwtToken(typeArg JWTTYPE, data interface{}) (string, error) {
 	switch typeArg {
 	case SYSMANAGE:
 		key = SysManage_SecretKey
-		claims := data.(SysManageCustomClaims)
+		claims := data.(SysManageUserClaims)
 		claims.StandardClaims = generateStandardClaims()
 		token = jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	case MERCHANT:
@@ -78,13 +78,13 @@ func ParseToken(typeArg JWTTYPE, token string) (interface{}, error) {
 	)
 	switch typeArg {
 	case SYSMANAGE:
-		jwtToken, err = jwt.ParseWithClaims(token, &SysManageCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+		jwtToken, err = jwt.ParseWithClaims(token, &SysManageUserClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return SysManage_SecretKey, nil
 		})
 		if err != nil || jwtToken == nil {
 			return nil, err
 		}
-		claim, ok := jwtToken.Claims.(*SysManageCustomClaims)
+		claim, ok := jwtToken.Claims.(*SysManageUserClaims)
 		if ok && jwtToken.Valid {
 			return claim, nil
 		}
