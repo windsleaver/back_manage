@@ -15,13 +15,9 @@ import (
  **/
 
 // GenerateUserBackToken 生成管理后台的token
-func GenerateUserBackToken(tenantId, userId string, isTenant, isAdmin, isBindWechat bool) (string, error) {
+func GenerateUserBackToken(userId string) (string, error) {
 	loginIn := wljwt.SysManageUserClaims{
-		TenantId:       tenantId,
 		UserId:         userId,
-		IsTenant:       isTenant,
-		IsAdmin:        isAdmin,
-		IsBindWechat:   isBindWechat,
 		StandardClaims: jwt.StandardClaims{},
 	}
 	token, errs := wljwt.CreateJwtToken(wljwt.SYSMANAGE, loginIn)

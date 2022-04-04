@@ -33,7 +33,6 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginResp, err error
 		tenantAndUser []model.SysTenantAndUser
 		tenantNumber  int
 		userToken     string
-		//r types.LoginReq
 	)
 	if req.UserName == "" || req.Password == "" {
 		return nil, errors.New("用户名或者密码不能为空！")
@@ -92,12 +91,11 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginResp, err error
 		return nil, errors.New("用户名或密码错误")
 	}
 	//成功登陆
-	userToken, err = token.GenerateUserBackToken("1112212", user.ID, false, false, false)
+	userToken, err = token.GenerateUserBackToken(user.ID)
 	if err != nil {
 		return nil, errors.New("其它错误")
 	}
 	return &types.LoginResp{
-		ID:        user.ID,
 		UserName:  user.UserName,
 		UserToken: userToken,
 	}, nil
