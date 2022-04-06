@@ -26,11 +26,7 @@ func NewEditTenantLogic(ctx context.Context, svcCtx *svc.ServiceContext) *EditTe
 
 // EditTenant 编辑租户信息
 func (l *EditTenantLogic) EditTenant(req *types.TeanantEditReq) error {
-	var (
-		//tenant model.SysTenant
-		err error
-	)
-	err = l.svcCtx.DbEngin.Model(&model.SysTenant{}).Where("id = ?", req.Id).Updates(&model.SysTenant{
+	err := l.svcCtx.DbEngin.Model(&model.SysTenant{}).Where("id = ?", req.Id).Updates(&model.SysTenant{
 		TenantName:  req.TenantName,
 		Name:        req.Name,
 		Description: req.Description,

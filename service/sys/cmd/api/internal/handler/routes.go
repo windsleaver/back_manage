@@ -55,6 +55,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/tenant/setStatus",
 				Handler: tenant.SetTenantStatusHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/tenant/getTenantPage",
+				Handler: tenant.GetTenantPageHandler(serverCtx),
+			},
 		},
 	)
 }

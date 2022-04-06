@@ -2,55 +2,78 @@
 package types
 
 type LoginReq struct {
-	UserName string `json:"userName"`
-	Password string `json:"password"`
+	UserName string `json:"userName"` //用户名
+	Password string `json:"password"` //密码
 }
 
 type LoginResp struct {
-	ID        string `json:"id"`
-	UserName  string `json:"userName"`
-	UserToken string `json:"userToken"`
+	UserName  string `json:"userName"`  //用户名
+	UserToken string `json:"userToken"` //Token
 }
 
 type UserReq struct {
-	UserName   string          `json:"userName"`
-	Password   string          `json:"password"`
-	Name       string          `json:"name"`
-	HeadImg    string          `json:"headImg"`
-	Phone      string          `json:"phone"`
-	Email      string          `json:"email"`
-	IsActive   bool            `json:"isActive"`
-	TenantList []TenantListReq `json:"tenantList"`
-	RoleList   []RoleListReq   `json:"roleList"`
+	UserName   string          `json:"userName"`   //用户名
+	Password   string          `json:"password"`   //密码
+	Name       string          `json:"name"`       //姓名
+	HeadImg    string          `json:"headImg"`    //头像
+	Phone      string          `json:"phone"`      //联系方式
+	Email      string          `json:"email"`      //邮箱
+	IsActive   bool            `json:"isActive"`   //是否启用[true:是;false:否]
+	TenantList []TenantListReq `json:"tenantList"` //租户列表
+	RoleList   []RoleListReq   `json:"roleList"`   //角色列表
 }
 
 type TenantListReq struct {
-	TenantId string `json:"tenantId"`
-	Remark   string `json:"remark"`
+	TenantId string `json:"tenantId"` //租户ID
+	Remark   string `json:"remark"`   //备注
 }
 
 type RoleListReq struct {
-	RoleId string `json:"roleId"`
-	Remark string `json:"remark"`
+	RoleId string `json:"roleId"` //角色ID
+	Remark string `json:"remark"` //备注
 }
 
 type TeanantReq struct {
-	TenantName  string `json:"tenantName"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	IsActive    bool   `json:"isActive"`
-	Remark      string `json:"remark"`
+	ParentTenantId string `json:"parentTenantId"` //父级租户ID
+	TenantName     string `json:"tenantName"`     //租户名（用户名）
+	Name           string `json:"name"`           //租户名称
+	Description    string `json:"description"`    //描述
+	IsActive       bool   `json:"isActive"`       //是否可用 true:可用 false:不可用
+	Token          string `json:"token"`          //用户Token
+	Remark         string `json:"remark"`         //备注
 }
 
 type TeanantEditReq struct {
-	Id          string `json:"id"`
-	TenantName  string `json:"tenantName"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	IsActive    bool   `json:"isActive"`
-	Remark      string `json:"remark"`
+	Id          string `json:"id"`          //ID
+	TenantName  string `json:"tenantName"`  //租户名（用户名）
+	Name        string `json:"name"`        //租户名称
+	Description string `json:"description"` //描述
+	IsActive    bool   `json:"isActive"`    //是否可用 true:可用 false:不可用
+	Remark      string `json:"remark"`      //备注
 }
 
 type TeanantStatusReq struct {
-	Id string `json:"id"`
+	Id string `json:"id"` //ID
+}
+
+type TenantPageReq struct {
+	Filter   string `form:"filter,optional"`     //关键字
+	Page     int    `form:"page,default=1"`      //页码
+	PageSize int    `form:"pageSize,default=10"` //每页数量
+}
+
+type TenantPageResp struct {
+	Total int64        `json:"total"` //总数据
+	Items []TenantResp `json:"items"` //客户资金账
+}
+
+type TenantResp struct {
+	Id             string `json:"id"`             //ID
+	ParentTenantId string `json:"parentTenantId"` //父级租户ID
+	TenantName     string `json:"tenantName"`     //租户名（用户名）
+	Name           string `json:"name"`           //租户名称
+	Description    string `json:"description"`    //描述
+	IsActive       bool   `json:"isActive"`       //是否可用 true:可用 false:不可用
+	Remark         string `json:"remark"`         //备注
+	CreatedAt      int64  `json:"createdAt"`      //创建时间
 }

@@ -10,7 +10,7 @@ import "gorm.io/gorm"
  * @Description:
  **/
 
-var DefaultPassword = "password"
+var DefaultPassword = "WindsLeaver"
 
 // SysUser 用户表
 type SysUser struct {

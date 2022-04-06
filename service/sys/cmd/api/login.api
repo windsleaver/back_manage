@@ -9,14 +9,13 @@ info(
 )
 
 type LoginReq {
-    UserName string `json:"userName"`
-    Password string `json:"password"`
+    UserName string `json:"userName"` //用户名
+    Password string `json:"password"` //密码
 }
 
 type LoginResp {
-    ID string `json:"id"`
-    UserName string `json:"userName"`
-    UserToken string `json:"userToken"`
+    UserName string `json:"userName"`   //用户名
+    UserToken string `json:"userToken"` //Token
 }
 
 @server(
@@ -28,5 +27,5 @@ service sys-api {
         summary: "用户登陆"
     )
     @handler login
-        post /user/login (LoginReq) returns (LoginResp)
+    post /user/login (LoginReq) returns (LoginResp)
 }

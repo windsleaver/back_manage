@@ -9,25 +9,25 @@ info(
 )
 
 type UserReq {
-    UserName string `json:"userName"`
-    Password string `json:"password"`
-    Name string `json:"name"`
-    HeadImg string `json:"headImg"`
-    Phone string `json:"phone"`
-    Email string `json:"email"`
-    IsActive bool `json:"isActive"`
-    TenantList []TenantListReq `json:"tenantList"`
-    RoleList []RoleListReq `json:"roleList"`
+    UserName string `json:"userName"`              //用户名
+    Password string `json:"password"`              //密码
+    Name string `json:"name"`                      //姓名
+    HeadImg string `json:"headImg"`                //头像
+    Phone string `json:"phone"`                    //联系方式
+    Email string `json:"email"`                    //邮箱
+    IsActive bool `json:"isActive"`                //是否启用[true:是;false:否]
+    TenantList []TenantListReq `json:"tenantList"` //租户列表
+    RoleList []RoleListReq `json:"roleList"`       //角色列表
 }
 
 type TenantListReq {
-    TenantId string `json:"tenantId"`
-    Remark string `json:"remark"`
+    TenantId string `json:"tenantId"` //租户ID
+    Remark string `json:"remark"`     //备注
 }
 
 type RoleListReq {
-    RoleId string `json:"roleId"`
-    Remark string `json:"remark"`
+    RoleId string `json:"roleId"` //角色ID
+    Remark string `json:"remark"` //备注
 }
 
 @server(

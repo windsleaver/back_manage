@@ -9,24 +9,47 @@ info(
 )
 
 type TeanantReq {
-    tenantName string `json:"tenantName"`
-    name string `json:"name"`
-    description string `json:"description"`
-    isActive bool `json:"isActive"`
-    remark string `json:"remark"`
+    parentTenantId string `json:"parentTenantId"` //父级租户ID
+    tenantName string `json:"tenantName"`         //租户名（用户名）
+    name string `json:"name"`                     //租户名称
+    description string `json:"description"`       //描述
+    isActive bool `json:"isActive"`               //是否可用 true:可用 false:不可用
+    token string `json:"token"`                   //用户Token
+    remark string `json:"remark"`                 //备注
 }
 
 type TeanantEditReq {
-    id string `json:"id"`
-    tenantName string `json:"tenantName"`
-    name string `json:"name"`
-    description string `json:"description"`
-    isActive bool `json:"isActive"`
-    remark string `json:"remark"`
+    id string `json:"id"`                   //ID
+    tenantName string `json:"tenantName"`   //租户名（用户名）
+    name string `json:"name"`               //租户名称
+    description string `json:"description"` //描述
+    isActive bool `json:"isActive"`         //是否可用 true:可用 false:不可用
+    remark string `json:"remark"`           //备注
 }
 
 type TeanantStatusReq {
-    id string `json:"id"`
+    id string `json:"id"` //ID
+}
+
+type TenantPageReq {
+    filter string `form:"filter,optional"`        //关键字
+    page int `form:"page,default=1"`              //页码
+    pageSize int `form:"pageSize,default=10"`     //每页数量
+}
+
+type TenantPageResp {
+    total int64 `json:"total"`               //总数据
+    items []TenantResp `json:"items"`        //客户资金账
+}
+type TenantResp {
+    id string `json:"id"`                                                //ID
+    parentTenantId string `json:"parentTenantId"`                        //父级租户ID
+    tenantName string `json:"tenantName"`                                //租户名（用户名）
+    name string `json:"name"`                                            //租户名称
+    description string `json:"description"`                              //描述
+    isActive bool `json:"isActive"`                                      //是否可用 true:可用 false:不可用
+    remark string `json:"remark"`                                        //备注
+    createdAt int64 `json:"createdAt"`                                   //创建时间
 }
 
 @server(
@@ -51,4 +74,10 @@ service sys-api {
     )
     @handler setTenantStatus
     post /tenant/setStatus (TeanantStatusReq) returns ()
+
+    @doc(
+        summary: "获取租户分页信息"
+    )
+    @handler getTenantPage
+    get /tenant/getTenantPage (TenantPageReq) returns (TenantPageResp)
 }
