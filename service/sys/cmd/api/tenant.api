@@ -14,7 +14,6 @@ type TeanantReq {
     name string `json:"name"`                     //租户名称
     description string `json:"description"`       //描述
     isActive bool `json:"isActive"`               //是否可用 true:可用 false:不可用
-    token string `json:"token"`                   //用户Token
     remark string `json:"remark"`                 //备注
 }
 
@@ -54,6 +53,7 @@ type TenantResp {
 
 @server(
     group: tenant
+    middleware: WlAuthMiddleware
 )
 
 service sys-api {

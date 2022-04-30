@@ -4,7 +4,6 @@ import (
 	"back_manage/service/sys/cmd/api/internal/config"
 	"back_manage/service/sys/cmd/api/internal/handler"
 	"back_manage/service/sys/cmd/api/internal/svc"
-	"back_manage/utils/middleware"
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/conf"
@@ -26,7 +25,7 @@ func main() {
 	defer server.Stop()
 
 	//全局中间件
-	server.Use(middleware.NewWlAuthMiddleware().Handle)
+	//server.Use(middleware.NewWlAuthMiddleware().Handle)
 
 	handler.RegisterHandlers(server, ctx)
 

@@ -2,13 +2,16 @@ package svc
 
 import (
 	"back_manage/service/sys/cmd/api/internal/config"
+	"back_manage/service/sys/cmd/api/internal/middleware"
+	"github.com/zeromicro/go-zero/rest"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 type ServiceContext struct {
-	Config  config.Config
-	DbEngin *gorm.DB
+	Config           config.Config
+	DbEngin          *gorm.DB
+	WlAuthMiddleware rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -20,7 +23,8 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		panic(err)
 	}
 	return &ServiceContext{
-		Config:  c,
-		DbEngin: db,
+		Config:           c,
+		DbEngin:          db,
+		WlAuthMiddleware: middleware.NewWlAuthMiddleware().Handle,
 	}
 }

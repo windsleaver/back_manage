@@ -9,23 +9,14 @@ import (
 	"strings"
 )
 
-/**
- * @Time   : 2022/1/26 23:44
- * @Author : WindsLeaver
- * @File   : wlmiddleware
- * @Version: 1.0.0
- * @Description:
- **/
-
-type WlMiddleware struct {
-	UserId string
+type WlAuthMiddleware struct {
 }
 
-func NewWlAuthMiddleware() *WlMiddleware {
-	return &WlMiddleware{}
+func NewWlAuthMiddleware() *WlAuthMiddleware {
+	return &WlAuthMiddleware{}
 }
 
-func (m *WlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
+func (m *WlAuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		authorization := r.Header.Get("Authorization")
 		if len(authorization) == 0 || authorization == "" {

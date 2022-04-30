@@ -39,27 +39,30 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/tenant/add",
-				Handler: tenant.CreateTenantHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/tenant/edit",
-				Handler: tenant.EditTenantHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/tenant/setStatus",
-				Handler: tenant.SetTenantStatusHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/tenant/getTenantPage",
-				Handler: tenant.GetTenantPageHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.WlAuthMiddleware},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/tenant/add",
+					Handler: tenant.CreateTenantHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/tenant/edit",
+					Handler: tenant.EditTenantHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/tenant/setStatus",
+					Handler: tenant.SetTenantStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/tenant/getTenantPage",
+					Handler: tenant.GetTenantPageHandler(serverCtx),
+				},
+			}...,
+		),
 	)
 }

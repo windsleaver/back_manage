@@ -13,7 +13,7 @@ import "gorm.io/gorm"
 // SysTenant 租户表
 type SysTenant struct {
 	ID             string         `json:"id" gorm:"column:id;primaryKey;type:varchar(32)"`          //ID
-	ParentTenantId string         `json:"parentTenantId" gorm:"column:parentTenantId;size:32"`      //父级租户ID
+	ParentTenantId string         `json:"parentTenantId" gorm:"size:32"`                            //父级租户ID
 	TenantName     string         `json:"tenantName" gorm:"size:32;not null"`                       //租户名（用户名）
 	Name           string         `json:"name" gorm:"size:32;not null"`                             //租户名称
 	Description    string         `json:"description" gorm:"size:512"`                              //描述

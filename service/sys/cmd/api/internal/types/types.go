@@ -39,7 +39,6 @@ type TeanantReq struct {
 	Name           string `json:"name"`           //租户名称
 	Description    string `json:"description"`    //描述
 	IsActive       bool   `json:"isActive"`       //是否可用 true:可用 false:不可用
-	Token          string `json:"token"`          //用户Token
 	Remark         string `json:"remark"`         //备注
 }
 

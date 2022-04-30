@@ -8,6 +8,7 @@ import (
 	"back_manage/utils/token"
 	"context"
 	"errors"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -68,30 +69,37 @@ func (l *LoginLogic) Login(req types.LoginReq) (resp *types.LoginResp, err error
 	}
 	//判断密码
 	if !security.VerifyPassword(req.Password, user.Salt, user.Password) {
-		//if user.LoginNumberErr >= 5 {
-		//	//每日密码输入错误5次则锁定账户，不允许登陆
-		//	m := map[string]interface{}{
-		//		"is_lock":          true,
-		//		"login_number_err": user.LoginNumberErr + 1,
-		//	}
-		//	err = s.userRepo.Update(ctx, user.ID, m)
-		//	if err != nil {
-		//		return hsresp.HsRes(hscode.INTERNALSERVER, nil, nil)
-		//	}
-		//} else {
-		//	//记录密码输入错误次数
-		//	m := map[string]interface{}{
-		//		"login_number_err": user.LoginNumberErr + 1,
-		//	}
-		//	err = s.userRepo.Update(ctx, user.ID, m)
-		//	if err != nil {
-		//		return hsresp.HsRes(hscode.INTERNALSERVER, nil, nil)
-		//	}
-		//}
+		loginNumberErr := user.LoginNumberErr + 1
+		if loginNumberErr >= 3 {
+			m := map[string]interface{}{
+				"is_lock":          true,
+				"login_number_err": loginNumberErr,
+			}
+			err = l.svcCtx.DbEngin.Model(&model.SysUser{}).Where("id = ?", user.ID).Updates(m).Error
+			if err != nil {
+				return nil, errors.New("其它错误")
+			}
+		} else {
+			m := map[string]interface{}{
+				"login_number_err": loginNumberErr,
+			}
+			err = l.svcCtx.DbEngin.Model(&model.SysUser{}).Where("id = ?", user.ID).Updates(m).Error
+			if err != nil {
+				return nil, errors.New("其它错误")
+			}
+		}
 		return nil, errors.New("用户名或密码错误")
 	}
 	//成功登陆
 	userToken, err = token.GenerateUserBackToken(user.ID)
+	if err != nil {
+		return nil, errors.New("其它错误")
+	}
+	m := map[string]interface{}{
+		"LastLoginTime":    time.Now().UnixMilli(),
+		"login_number_err": 0,
+	}
+	err = l.svcCtx.DbEngin.Model(&model.SysUser{}).Where("id = ?", user.ID).Updates(m).Error
 	if err != nil {
 		return nil, errors.New("其它错误")
 	}
