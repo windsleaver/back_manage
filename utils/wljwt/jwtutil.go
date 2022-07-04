@@ -155,15 +155,33 @@ func ConvertTokenArg(typeArg string) JWTTYPE {
 	return r
 }
 
+// ConvertTokenString Arg类型转换为String类型
+func ConvertTokenString(typeArg JWTTYPE) string {
+	var r string
+	switch typeArg {
+	case SYSMANAGE:
+		r = "SYSMANAGE"
+	case MERCHANT:
+		r = "MERCHANT"
+	case RIDER:
+		r = "RIDER"
+	case MAINUSERAPP:
+		r = "MAINUSERAPP"
+	case MAINUSERMINIPROGRAM:
+		r = "MAINUSERMINIPROGRAM"
+	}
+	return r
+}
+
 // generateStandardClaims 生成StandardClaims
 func generateStandardClaims() jwt.StandardClaims {
 	return jwt.StandardClaims{
-		Audience:  "yt_cloud",
+		Audience:  "back_manage",
 		ExpiresAt: time.Now().Add(48 * time.Hour).Unix(),
 		Id:        "12156120115412",
 		IssuedAt:  time.Now().Unix(),
-		Issuer:    "hs_lynnss",
+		Issuer:    "winds_leaver",
 		NotBefore: time.Now().Unix(),
-		Subject:   "yt",
+		Subject:   "back_manage",
 	}
 }

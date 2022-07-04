@@ -6,6 +6,7 @@ import (
 	"back_manage/service/sys/cmd/api/internal/types"
 	"back_manage/utils/idutil"
 	"context"
+	"errors"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -25,7 +26,18 @@ func NewCreateTenantLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Crea
 
 // CreateTenant 创建租户信息
 func (l *CreateTenantLogic) CreateTenant(req *types.TeanantReq) error {
-	err := l.svcCtx.DbEngin.Create(&model.SysTenant{
+	var (
+		err error
+		num int64
+	)
+	err = l.svcCtx.DbEngin.Where("tenant_name = ?", req.TenantName).Count(&num).Error
+	if err != nil {
+		return err
+	}
+	if num > 0 {
+		return errors.New("当前租户信息已存在")
+	}
+	err = l.svcCtx.DbEngin.Create(&model.SysTenant{
 		ID:             idutil.NextId(),
 		ParentTenantId: req.ParentTenantId,
 		TenantName:     req.TenantName,

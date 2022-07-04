@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"back_manage/utils/hsresult"
+	token2 "back_manage/utils/token"
 	"back_manage/utils/wljwt"
 	"context"
 	"errors"
@@ -25,7 +26,7 @@ func (m *WlAuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		} else {
 			pointLen := strings.Count(authorization, ".")
 			if pointLen < 3 {
-				hsresult.HsResponse(w, nil, errors.New("ERR_401"))
+				hsresult.HsResponse(w, nil, errors.New("ERR_4011"))
 				return
 			}
 			tLen := strings.Index(authorization, ".")
@@ -33,12 +34,17 @@ func (m *WlAuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			token := authorization[tLen+1:]
 			jwtType := wljwt.ConvertTokenArg(typeArg)
 			if jwtType == 0 {
-				hsresult.HsResponse(w, nil, errors.New("ERR_401"))
+				hsresult.HsResponse(w, nil, errors.New("ERR_4012"))
 				return
 			}
 			jwtInfo, err := wljwt.ParseToken(jwtType, token)
 			if err != nil {
-				hsresult.HsResponse(w, nil, errors.New("ERR_401"))
+				hsresult.HsResponse(w, nil, errors.New("ERR_4013"))
+				return
+			}
+			err = token2.ParseMark(jwtInfo.(*wljwt.SysManageUserClaims).MarkInfo, typeArg)
+			if err != nil {
+				hsresult.HsResponse(w, nil, errors.New("ERR_4012"))
 				return
 			}
 			switch jwtType {

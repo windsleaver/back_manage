@@ -27,6 +27,7 @@ type SysManageUserClaims struct {
 	IsTenant     bool   `json:"is_tenant"`      //是否是租主[true:是; false:否]
 	IsAdmin      bool   `json:"is_admin"`       //是否是管理员[true:是; false:否]
 	IsBindWechat bool   `json:"is_bind_wechat"` //是否绑定微信[true:是; false:否]
+	MarkInfo     string `json:"mark_info"`      //token信息标识
 	jwt.StandardClaims
 }
 

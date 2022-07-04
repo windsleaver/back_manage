@@ -2,10 +2,13 @@ package commonutil
 
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
 	"math"
 	"net/url"
+	"reflect"
 	"strconv"
+	"unsafe"
 )
 
 /**
@@ -135,4 +138,24 @@ func DistanceLatOrLng(lon1, lat1, lon2, lat2 float64) (distance float64) {
 	theta := math.Acos((EARTH_RADIUS*EARTH_RADIUS + EARTH_RADIUS*EARTH_RADIUS - d*d) / (2 * EARTH_RADIUS * EARTH_RADIUS))
 	distance = theta * EARTH_RADIUS
 	return
+}
+
+// getBase64Table Base64表
+func getBase64Table() string {
+	str := "IJjkKLMNO567PQX12RVW3YZaDEFGbcdefghiABCHlSTUmnopqrxyz04stuvw89+/"
+	return str
+}
+
+// Encode Base64加密
+func Encode(data string) string {
+	content := *(*[]byte)(unsafe.Pointer((*reflect.SliceHeader)(unsafe.Pointer(&data))))
+	coder := base64.NewEncoding(getBase64Table())
+	return coder.EncodeToString(content)
+}
+
+// Decode Base64解密
+func Decode(data string) string {
+	coder := base64.NewEncoding(getBase64Table())
+	result, _ := coder.DecodeString(data)
+	return *(*string)(unsafe.Pointer(&result))
 }
