@@ -16,7 +16,7 @@ func InitData() {
 func initDataBase() {
 	tableList := []interface{}{model.SysUser{}, model.SysTenant{}, model.SysRole{}, model.SysTenantAndRole{},
 		model.SysTenantAndUser{}, model.SysUserAndRole{}}
-	dsn := "host=localhost user=postgres password=password dbname=back_manage port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=localhost user=postgres password=b8662279 dbname=back_manage port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	for _, item := range tableList {
 		db.AutoMigrate(item)
